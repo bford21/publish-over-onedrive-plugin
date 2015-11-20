@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+MIT License
+Copyright (c) 2015, René de Groot
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <!-- Baseline Jenkins version you use to build and test the plugin. Users must have this version or newer to run. -->
+        <version>1.580.1</version>
+        <relativePath />
+    </parent>
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>publish-over-dropbox</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>hpi</packaging>
+
+    <name>Publish Over Dropbox</name>
+    <description>Send build artifacts to Dropbox account</description>
+       <url>https://wiki.jenkins-ci.org/display/JENKINS/Publish+over+Dropbox+Plugin</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <comments>All source code is under the MIT license.</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>rcgroot</id>
+            <name>René de Groot</name>
+            <email>rcgroot@gmail.com</email>
+        </developer>
+    </developers>
+
+    <!-- Assuming you want to host on @jenkinsci: -->
+    <scm>
+      <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+      <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+      <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
+      <tag>HEAD</tag>
+  </scm>
+
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </repository>
+        <repository>
+            <id>uk.maven.org</id>
+            <url>http://uk.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>de.tuberlin</id>
+            <url>https://raw.github.com/tawalaya/onedrivejavasdk/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>publish-over</artifactId>
+            <version>0.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>credentials</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>de.tuberlin</groupId>
+            <artifactId>onedrivesdk</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+</project>
