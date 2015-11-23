@@ -21,12 +21,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <relativePath />
     </parent>
     <groupId>org.jenkins-ci.plugins</groupId>
-    <artifactId>publish-over-dropbox</artifactId>
+    <artifactId>publish-over-onedrive</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
-    <name>Publish Over Dropbox</name>
-    <description>Send build artifacts to Dropbox account</description>
+    <name>Publish Over OneDrive</name>
+    <description>Send build artifacts to OneDrive account</description>
        <url>https://wiki.jenkins-ci.org/display/JENKINS/Publish+over+Dropbox+Plugin</url>
     <licenses>
         <license>

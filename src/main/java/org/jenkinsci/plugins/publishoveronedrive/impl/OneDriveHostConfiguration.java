@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.domains.DomainRequirement;
@@ -36,18 +36,19 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.jenkinsci.plugins.publishoverdropbox.OneDriveToken;
-import org.jenkinsci.plugins.publishoverdropbox.descriptor.OneDriveHostConfigurationDescriptor;
-import org.jenkinsci.plugins.publishoverdropbox.domain.OneDrive;
-import org.jenkinsci.plugins.publishoverdropbox.domain.OneDriveClient;
+import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
+import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDriveHostConfigurationDescriptor;
+import org.jenkinsci.plugins.publishoveronedrive.domain.OneDrive;
+import org.jenkinsci.plugins.publishoveronedrive.domain.OneDriveClient;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
-public class DropboxHostConfiguration extends BPHostConfiguration<OneDriveClient, Object> implements Describable<DropboxHostConfiguration> {
+public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClient, Object> implements Describable<OneDriveHostConfiguration> {
 
     public static final int DEFAULT_TIMEOUT = 300000;
     private static final long serialVersionUID = 1L;
@@ -55,7 +56,7 @@ public class DropboxHostConfiguration extends BPHostConfiguration<OneDriveClient
     private final int timeout;
 
     @DataBoundConstructor
-    public DropboxHostConfiguration(final String name, final String token, final String remoteRootDir, final int timeout) {
+    public OneDriveHostConfiguration(final String name, final String token, final String remoteRootDir, final int timeout) {
         super(name, null, null, null, remoteRootDir, 0);
         this.timeout = timeout;
         this.token = token == null ? null : lookupTokenId(token);
@@ -87,7 +88,7 @@ public class DropboxHostConfiguration extends BPHostConfiguration<OneDriveClient
         } catch (IOException ioe) {
             throw new BapPublisherException(Messages.exception_bap_createclient(ioe.getLocalizedMessage()), ioe);
         } catch (OneDriveException ex) {
-            Logger.getLogger(DropboxHostConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OneDriveHostConfiguration.class.getName()).log(Level.SEVERE, null, ex);
         }
         return client;
     }
@@ -136,7 +137,7 @@ public class DropboxHostConfiguration extends BPHostConfiguration<OneDriveClient
                 .append(timeout);
     }
 
-    protected EqualsBuilder addToEquals(final EqualsBuilder builder, final DropboxHostConfiguration that) {
+    protected EqualsBuilder addToEquals(final EqualsBuilder builder, final OneDriveHostConfiguration that) {
         return super.addToEquals(builder, that)
                 .append(token, that.token)
                 .append(timeout, that.timeout);
@@ -152,7 +153,7 @@ public class DropboxHostConfiguration extends BPHostConfiguration<OneDriveClient
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxHostConfiguration) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDriveHostConfiguration) that).isEquals();
     }
 
     public int hashCode() {

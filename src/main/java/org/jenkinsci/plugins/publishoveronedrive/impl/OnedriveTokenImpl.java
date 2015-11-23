@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.impl.BaseStandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
-import org.jenkinsci.plugins.publishoverdropbox.OneDriveToken;
-import org.jenkinsci.plugins.publishoverdropbox.domain.OneDrive;
+import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
+import org.jenkinsci.plugins.publishoveronedrive.domain.OneDrive;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
-public class DropboxTokenImpl extends BaseStandardCredentials implements OneDriveToken {
+public class OnedriveTokenImpl extends BaseStandardCredentials implements OneDriveToken {
 
     @Nonnull
     private final String authorizationCode;
@@ -43,7 +44,7 @@ public class DropboxTokenImpl extends BaseStandardCredentials implements OneDriv
     private final String accessCode;
 
     @DataBoundConstructor
-    public DropboxTokenImpl(CredentialsScope scope, String id, @Nonnull String authorizationCode, String description) throws IOException {
+    public OnedriveTokenImpl(CredentialsScope scope, String id, @Nonnull String authorizationCode, String description) throws IOException {
         super(scope, id, description);
         this.authorizationCode = authorizationCode;
         this.accessCode = OneDrive.convertAuthorizationToAccessCode(authorizationCode);
@@ -66,7 +67,7 @@ public class DropboxTokenImpl extends BaseStandardCredentials implements OneDriv
 
         @Override
         public String getDisplayName() {
-            return Messages.DropboxTokenImpl_api_token();
+            return Messages.OneDriveTokenImpl_api_token();
         }
     }
 }

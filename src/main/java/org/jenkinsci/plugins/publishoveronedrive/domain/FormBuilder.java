@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.domain;
+package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

@@ -22,8 +22,12 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.domain;
+package org.jenkinsci.plugins.publishoveronedrive.domain;
 
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.File;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.TokenResponse;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.AccountInfo;
 import com.google.gson.Gson;
 import de.tuberlin.onedrivesdk.OneDriveException;
 import de.tuberlin.onedrivesdk.OneDriveFactory;
@@ -32,8 +36,7 @@ import de.tuberlin.onedrivesdk.common.OneDriveScope;
 import de.tuberlin.onedrivesdk.file.OneFile;
 import de.tuberlin.onedrivesdk.folder.OneFolder;
 import org.apache.commons.lang.StringUtils;
-import org.jenkinsci.plugins.publishoverdropbox.domain.model.*;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -144,9 +147,9 @@ public class OneDrive {
                     .appendPath(absolute)
                     .build();
         } catch (URISyntaxException e) {
-            throw new RestException(Messages.exception_dropbox_url(), e);
+            throw new RestException(Messages.exception_onedrive_url(), e);
         } catch (MalformedURLException e) {
-            throw new RestException(Messages.exception_dropbox_url(), e);
+            throw new RestException(Messages.exception_onedrive_url(), e);
         }
         JsonObjectRequest<Folder> request = new JsonObjectRequest<Folder>(url, gson, Folder.class);
         request.setTimeout(timeout);
@@ -155,7 +158,7 @@ public class OneDrive {
         try {
             folder = request.execute();
         } catch (IOException e) {
-            throw new RestException(Messages.exception_dropbox_folder(url), e);
+            throw new RestException(Messages.exception_onedrive_folder(url), e);
         }
         return folder;
     }
@@ -176,7 +179,7 @@ public class OneDrive {
                     .appendPath(absolute)
                     .build();
         } catch (URISyntaxException e) {
-            throw new IOException(Messages.exception_dropbox_url(), e);
+            throw new IOException(Messages.exception_onedrive_url(), e);
         }
         JsonObjectRequest<File> request = new JsonObjectRequest<File>(url, gson, File.class);
         request.setTimeout(timeout);
@@ -189,8 +192,7 @@ public class OneDrive {
     private OneFile retrieveFileMetaData(String relative) throws IOException, OneDriveException {
         String absolute = createAbsolutePath(relative);
         OneFile file = sdk.getFileByPath(absolute);
-        return file;
-        
+        return file;    
     }
     
     /*
@@ -200,7 +202,7 @@ public class OneDrive {
         String body = new FormBuilder()
                 .appendQueryParameter(PARAM_ROOT, workingFolder.getRoot())
                 .appendQueryParameter(PARAM_PATH, absolute)
-                .appendQueryParameter(PARAM_LOCALE, getDropboxLocale())
+                .appendQueryParameter(PARAM_LOCALE, getOneDriveLocale())
                 .build();
         String contentType = FormBuilder.CONTENT_TYPE;
 
@@ -232,7 +234,7 @@ public class OneDrive {
         try {
             final URLBuilder builder = new URLBuilder(URL_FILE_UPLOAD);
             builder.appendPath(absolute)
-                    .appendQueryParameter(PARAM_LOCALE, getDropboxLocale())
+                    .appendQueryParameter(PARAM_LOCALE, getOneDriveLocale())
                     .appendQueryParameter(PARAM_OVERWRITE, VALUE_TRUE)
                     .appendQueryParameter(PARAM_AUTORENAME, VALUE_FALSE);
             if (parentRev != null) {
@@ -240,7 +242,7 @@ public class OneDrive {
             }
             url = builder.build();
         } catch (URISyntaxException e) {
-            throw new IOException(Messages.exception_dropbox_url(), e);
+            throw new IOException(Messages.exception_onedrive_url(), e);
         }
         
         JsonObjectRequest<File> request = new JsonObjectRequest<File>(url, content, null, gson, File.class);
@@ -273,11 +275,11 @@ public class OneDrive {
             for (BaseFile file : workingFolder.getContents()) {
                 DeletedFile deletedFile = deleteFile(file);
                 if (!deletedFile.isDeleted()) {
-                    throw new IOException(Messages.exception_dropbox_delete());
+                    throw new IOException(Messages.exception_onedrive_delete());
                 }
             }
         } else {
-            throw new IOException(Messages.exception_dropbox_deleteIsNotFolder());
+            throw new IOException(Messages.exception_onedrive_deleteIsNotFolder());
         }
     }
     */
@@ -306,7 +308,7 @@ public class OneDrive {
                 try {
                     lastModified = df.parse(file.getModified());
                 } catch (ParseException e) {
-                    throw new IOException("Was unable to read Dropbox date format", e);
+                    throw new IOException("Was unable to read OneDrive date format", e);
                 }
                 if (lastModified.before(cutoff))
                     deleteFile(file);
@@ -327,10 +329,10 @@ public class OneDrive {
             body = new FormBuilder()
                     .appendQueryParameter(PARAM_ROOT, file.getRoot())
                     .appendQueryParameter(PARAM_PATH, file.getPath())
-                    .appendQueryParameter(PARAM_LOCALE, getDropboxLocale())
+                    .appendQueryParameter(PARAM_LOCALE, getOneDriveLocale())
                     .build();
         } catch (UnsupportedEncodingException e) {
-            throw new RestException(Messages.exception_dropbox_body(), e);
+            throw new RestException(Messages.exception_onedrive_body(), e);
         }
         JsonObjectRequest<DeletedFile> request = new JsonObjectRequest<DeletedFile>(url, body, FormBuilder.CONTENT_TYPE, gson, DeletedFile.class);
         request.setTimeout(timeout);
@@ -379,7 +381,7 @@ public class OneDrive {
                 .appendQueryParameter("client_id", Config.CLIENT_ID);
         try {
             // Apply production config not included in source distribution
-            Class privateConfig = Class.forName("org.jenkinsci.plugins.publishoverdropbox.domain.ConfigPrivate");
+            Class privateConfig = Class.forName("org.jenkinsci.plugins.publishoveronedrive.domain.ConfigPrivate");
             Class[] argClass = {builder.getClass()};
             Method method = privateConfig.getDeclaredMethod("append", argClass);
             method.invoke(null, builder);
@@ -433,7 +435,7 @@ public class OneDrive {
                 
         try {
             // Apply production config not included in source distribution
-            //Class privateConfig = Class.forName("org.jenkinsci.plugins.publishoverdropbox.domain.ConfigPrivate");
+            //Class privateConfig = Class.forName("org.jenkinsci.plugins.publishoveronedrive.domain.ConfigPrivate");
             //Class[] argClass = {builder.getClass()};
             //Method method = privateConfig.getDeclaredMethod("append", argClass);
            // method.invoke(null, builder);
@@ -455,14 +457,14 @@ public class OneDrive {
         try {
             url = new URLBuilder(urlSource).build();
         } catch (URISyntaxException e) {
-            throw new RestException(Messages.exception_dropbox_url(), e);
+            throw new RestException(Messages.exception_onedrive_url(), e);
         } catch (MalformedURLException e) {
-            throw new RestException(Messages.exception_dropbox_url(), e);
+            throw new RestException(Messages.exception_onedrive_url(), e);
         }
         return url;
     }
 
-    private String getDropboxLocale() {
+    private String getOneDriveLocale() {
         return Locale.getDefault().toLanguageTag();
     }
 

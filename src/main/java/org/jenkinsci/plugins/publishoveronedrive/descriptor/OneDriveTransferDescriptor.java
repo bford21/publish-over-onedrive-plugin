@@ -22,22 +22,22 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.descriptor;
+package org.jenkinsci.plugins.publishoveronedrive.descriptor;
 
 import hudson.Extension;
 import hudson.model.Descriptor;
 import hudson.util.FormValidation;
 import jenkins.model.Jenkins;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxPublisherPlugin;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxTransfer;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDrivePublisherPlugin;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveTransfer;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import org.kohsuke.stapler.QueryParameter;
 
 @Extension
-public class OneDriveTransferDescriptor extends Descriptor<DropboxTransfer> {
+public class OneDriveTransferDescriptor extends Descriptor<OneDriveTransfer> {
 
     public OneDriveTransferDescriptor() {
-        super(DropboxTransfer.class);
+        super(OneDriveTransfer.class);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class OneDriveTransferDescriptor extends Descriptor<DropboxTransfer> {
         return Messages.transfer_descriptor();
     }
 
-    public DropboxPublisherPlugin.Descriptor getPublisherPluginDescriptor() {
-        return Jenkins.getInstance().getDescriptorByType(DropboxPublisherPlugin.Descriptor.class);
+    public OneDrivePublisherPlugin.Descriptor getPublisherPluginDescriptor() {
+        return Jenkins.getInstance().getDescriptorByType(OneDrivePublisherPlugin.Descriptor.class);
     }
 
     public FormValidation doCheckSourceFiles(@QueryParameter final String value) {
@@ -54,7 +54,7 @@ public class OneDriveTransferDescriptor extends Descriptor<DropboxTransfer> {
     }
 
     public boolean canUseExcludes() {
-        return DropboxTransfer.canUseExcludes();
+        return OneDriveTransfer.canUseExcludes();
     }
 
     public jenkins.plugins.publish_over.view_defaults.BPTransfer.Messages getCommonFieldNames() {

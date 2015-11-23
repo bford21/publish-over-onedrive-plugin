@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.model.Describable;
 import jenkins.model.Jenkins;
@@ -31,28 +31,28 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.jenkinsci.plugins.publishoverdropbox.descriptor.OneDrivePublisherDescriptor;
+import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDrivePublisherDescriptor;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.ArrayList;
 
-public class DropboxPublisher extends BapPublisher<DropboxTransfer> implements Describable<DropboxPublisher> {
+public class OneDrivePublisher extends BapPublisher<OneDriveTransfer> implements Describable<OneDrivePublisher> {
 
     private static final long serialVersionUID = 1L;
 
     @DataBoundConstructor
-    public DropboxPublisher(final String configName, final boolean verbose, final ArrayList<DropboxTransfer> transfers,
-                            final boolean useWorkspaceInPromotion, final boolean usePromotionTimestamp, final DropboxRetry retry,
-                            final DropboxPublisherLabel label) {
+    public OneDrivePublisher(final String configName, final boolean verbose, final ArrayList<OneDriveTransfer> transfers,
+                            final boolean useWorkspaceInPromotion, final boolean usePromotionTimestamp, final OneDriveRetry retry,
+                            final OneDrivePublisherLabel label) {
         super(configName, verbose, transfers, useWorkspaceInPromotion, usePromotionTimestamp, retry, label, null);
     }
 
-    public DropboxRetry getRetry() {
-        return (DropboxRetry) super.getRetry();
+    public OneDriveRetry getRetry() {
+        return (OneDriveRetry) super.getRetry();
     }
 
-    public DropboxPublisherLabel getLabel() {
-        return (DropboxPublisherLabel) super.getLabel();
+    public OneDrivePublisherLabel getLabel() {
+        return (OneDrivePublisherLabel) super.getLabel();
     }
 
     public OneDrivePublisherDescriptor getDescriptor() {
@@ -63,7 +63,7 @@ public class DropboxPublisher extends BapPublisher<DropboxTransfer> implements D
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxPublisher) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDrivePublisher) that).isEquals();
     }
 
     public int hashCode() {

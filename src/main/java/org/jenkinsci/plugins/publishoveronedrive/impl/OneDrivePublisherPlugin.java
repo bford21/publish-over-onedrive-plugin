@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.Extension;
 import jenkins.model.Jenkins;
@@ -32,18 +32,18 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.jenkinsci.plugins.publishoverdropbox.descriptor.OneDrivePublisherPluginDescriptor;
-import org.jenkinsci.plugins.publishoverdropbox.domain.OneDriveClient;
+import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDrivePublisherPluginDescriptor;
+import org.jenkinsci.plugins.publishoveronedrive.domain.OneDriveClient;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.ArrayList;
 
-public class DropboxPublisherPlugin extends BPPlugin<DropboxPublisher, OneDriveClient, Object> {
+public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriveClient, Object> {
 
     private static final long serialVersionUID = 1L;
 
     @DataBoundConstructor
-    public DropboxPublisherPlugin(final ArrayList<DropboxPublisher> publishers, final boolean continueOnError, final boolean failOnError,
+    public OneDrivePublisherPlugin(final ArrayList<OneDrivePublisher> publishers, final boolean continueOnError, final boolean failOnError,
                                   final boolean alwaysPublishFromMaster, final String masterNodeName) {
         super(Messages.console_message_prefix(), publishers, continueOnError, failOnError, alwaysPublishFromMaster, masterNodeName,
                 null);
@@ -53,7 +53,7 @@ public class DropboxPublisherPlugin extends BPPlugin<DropboxPublisher, OneDriveC
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxPublisherPlugin) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDrivePublisherPlugin) that).isEquals();
     }
 
     public int hashCode() {
@@ -69,7 +69,7 @@ public class DropboxPublisherPlugin extends BPPlugin<DropboxPublisher, OneDriveC
         return Jenkins.getInstance().getDescriptorByType(Descriptor.class);
     }
 
-    public DropboxHostConfiguration getConfiguration(final String name) {
+    public OneDriveHostConfiguration getConfiguration(final String name) {
         return getDescriptor().getConfiguration(name);
     }
 

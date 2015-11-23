@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox;
+package org.jenkinsci.plugins.publishoveronedrive;
 
 import com.cloudbees.plugins.credentials.CredentialsNameProvider;
 import com.cloudbees.plugins.credentials.NameWith;
 import com.cloudbees.plugins.credentials.common.StandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Util;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 import javax.annotation.Nonnull;
 
@@ -48,7 +48,7 @@ public interface OneDriveToken extends StandardCredentials {
         @NonNull
         public String getName(@NonNull OneDriveToken credentials) {
             String description = Util.fixEmptyAndTrim(credentials.getDescription());
-            return description != null ? description : Messages.DropboxTokenImpl_api_token();
+            return description != null ? description : Messages.OneDriveTokenImpl_api_token();
         }
 
     }

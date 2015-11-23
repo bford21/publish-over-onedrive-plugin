@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.domain.model;
+package org.jenkinsci.plugins.publishoveronedrive.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -22,13 +22,13 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.domain;
+package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
-import org.jenkinsci.plugins.publishoverdropbox.domain.model.BaseResponse;
-import org.jenkinsci.plugins.publishoverdropbox.domain.model.RestException;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.BaseResponse;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 import java.io.*;
 import java.net.HttpURLConnection;

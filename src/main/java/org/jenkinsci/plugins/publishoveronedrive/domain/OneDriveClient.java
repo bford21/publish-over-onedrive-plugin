@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.domain;
+package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import de.tuberlin.onedrivesdk.OneDriveException;
 import de.tuberlin.onedrivesdk.folder.OneFolder;
@@ -32,17 +32,17 @@ import jenkins.plugins.publish_over.BPDefaultClient;
 import jenkins.plugins.publish_over.BapPublisherException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jenkinsci.plugins.publishoverdropbox.domain.model.Folder;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxTransfer;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.Folder;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveTransfer;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jenkinsci.plugins.publishoverdropbox.domain.model.RestException;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
 
-public class OneDriveClient extends BPDefaultClient<DropboxTransfer> {
+public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
 
     private static final Log LOG = LogFactory.getLog(OneDriveClient.class);
     private BPBuildInfo buildInfo;
@@ -93,7 +93,7 @@ public class OneDriveClient extends BPDefaultClient<DropboxTransfer> {
         }
     }
 
-    public void beginTransfers(final DropboxTransfer transfer) {
+    public void beginTransfers(final OneDriveTransfer transfer) {
         if (!transfer.hasConfiguredSourceFiles()) {
             throw new BapPublisherException(Messages.exception_noSourceFiles());
         }
@@ -108,7 +108,7 @@ public class OneDriveClient extends BPDefaultClient<DropboxTransfer> {
         }
     }
 
-    public void transferFile(final DropboxTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
+    public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
             onedrive.storeFile(filePath.getName(), content);
         } catch (IOException ioe) {

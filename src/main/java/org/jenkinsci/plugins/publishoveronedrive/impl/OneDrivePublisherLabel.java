@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.Extension;
 import hudson.model.Describable;
@@ -35,25 +35,25 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.kohsuke.stapler.DataBoundConstructor;
 
-public class DropboxPublisherLabel extends PublisherLabel implements Describable<DropboxPublisherLabel> {
+public class OneDrivePublisherLabel extends PublisherLabel implements Describable<OneDrivePublisherLabel> {
 
 
     private static final long serialVersionUID = 1L;
 
     @DataBoundConstructor
-    public DropboxPublisherLabel(final String label) {
+    public OneDrivePublisherLabel(final String label) {
         super(label);
     }
 
-    public DropboxPublisherLabelDescriptor getDescriptor() {
-        return Jenkins.getInstance().getDescriptorByType(DropboxPublisherLabelDescriptor.class);
+    public OneDrivePublisherLabelDescriptor getDescriptor() {
+        return Jenkins.getInstance().getDescriptorByType(OneDrivePublisherLabelDescriptor.class);
     }
 
     public boolean equals(final Object that) {
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxPublisherLabel) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDrivePublisherLabel) that).isEquals();
     }
 
     public int hashCode() {
@@ -65,7 +65,7 @@ public class DropboxPublisherLabel extends PublisherLabel implements Describable
     }
 
     @Extension
-    public static class DropboxPublisherLabelDescriptor extends Descriptor<DropboxPublisherLabel> {
+    public static class OneDrivePublisherLabelDescriptor extends Descriptor<OneDrivePublisherLabel> {
 
         @Override
         public String getDisplayName() {

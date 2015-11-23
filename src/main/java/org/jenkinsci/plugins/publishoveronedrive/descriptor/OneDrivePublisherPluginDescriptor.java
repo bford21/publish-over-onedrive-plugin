@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.descriptor;
+package org.jenkinsci.plugins.publishoveronedrive.descriptor;
 
 import hudson.Util;
 import hudson.model.AbstractProject;
@@ -34,9 +34,9 @@ import hudson.util.FormValidation;
 import jenkins.model.Jenkins;
 import jenkins.plugins.publish_over.*;
 import net.sf.json.JSONObject;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxHostConfiguration;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxPublisherPlugin;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveHostConfiguration;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDrivePublisherPlugin;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -45,7 +45,7 @@ import java.util.List;
 
 public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publisher> {
 
-    private final CopyOnWriteList<DropboxHostConfiguration> hostConfigurations = new CopyOnWriteList<DropboxHostConfiguration>();
+    private final CopyOnWriteList<OneDriveHostConfiguration> hostConfigurations = new CopyOnWriteList<OneDriveHostConfiguration>();
     /**
      * null - prevent complaints from xstream
      */
@@ -56,7 +56,7 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
     private Class hostConfigClass;
 
     public OneDrivePublisherPluginDescriptor() {
-        super(DropboxPublisherPlugin.class);
+        super(OneDrivePublisherPlugin.class);
         load();
     }
 
@@ -69,12 +69,12 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
         return !BPPlugin.PROMOTION_JOB_TYPE.equals(aClass.getCanonicalName());
     }
 
-    public List<DropboxHostConfiguration> getHostConfigurations() {
+    public List<OneDriveHostConfiguration> getHostConfigurations() {
         return hostConfigurations.getView();
     }
 
-    public DropboxHostConfiguration getConfiguration(final String name) {
-        for (DropboxHostConfiguration configuration : hostConfigurations) {
+    public OneDriveHostConfiguration getConfiguration(final String name) {
+        for (OneDriveHostConfiguration configuration : hostConfigurations) {
             if (configuration.getName().equals(name)) {
                 return configuration;
             }
@@ -83,7 +83,7 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
     }
 
     public boolean configure(final StaplerRequest request, final JSONObject formData) {
-        hostConfigurations.replaceBy(request.bindJSONToList(DropboxHostConfiguration.class, formData.get("instance")));
+        hostConfigurations.replaceBy(request.bindJSONToList(OneDriveHostConfiguration.class, formData.get("instance")));
         save();
         return true;
     }
@@ -117,7 +117,7 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
     }
 
     public FormValidation doTestConnection(final StaplerRequest request, final StaplerResponse response) {
-        final DropboxHostConfiguration hostConfig = request.bindParameters(DropboxHostConfiguration.class, "");
+        final OneDriveHostConfiguration hostConfig = request.bindParameters(OneDriveHostConfiguration.class, "");
         final BPBuildInfo buildInfo = createDummyBuildInfo();
         try {
             hostConfig.createClient(buildInfo).disconnect();

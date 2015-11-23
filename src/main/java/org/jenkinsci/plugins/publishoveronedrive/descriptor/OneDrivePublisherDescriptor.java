@@ -22,20 +22,20 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.descriptor;
+package org.jenkinsci.plugins.publishoveronedrive.descriptor;
 
 import hudson.Extension;
 import hudson.model.Descriptor;
 import jenkins.model.Jenkins;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxPublisher;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxPublisherPlugin;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDrivePublisher;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDrivePublisherPlugin;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 @Extension
-public class OneDrivePublisherDescriptor extends Descriptor<DropboxPublisher> {
+public class OneDrivePublisherDescriptor extends Descriptor<OneDrivePublisher> {
 
     public OneDrivePublisherDescriptor() {
-        super(DropboxPublisher.class);
+        super(OneDrivePublisher.class);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class OneDrivePublisherDescriptor extends Descriptor<DropboxPublisher> {
         return Messages.publisher_descriptor();
     }
 
-    public DropboxPublisherPlugin.Descriptor getPublisherPluginDescriptor() {
-        return Jenkins.getInstance().getDescriptorByType(DropboxPublisherPlugin.Descriptor.class);
+    public OneDrivePublisherPlugin.Descriptor getPublisherPluginDescriptor() {
+        return Jenkins.getInstance().getDescriptorByType(OneDrivePublisherPlugin.Descriptor.class);
     }
 
     public OneDriveTransferDescriptor getTransferDescriptor() {

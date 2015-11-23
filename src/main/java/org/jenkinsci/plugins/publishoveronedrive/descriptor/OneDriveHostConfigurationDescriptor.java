@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.descriptor;
+package org.jenkinsci.plugins.publishoveronedrive.descriptor;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
 import com.cloudbees.plugins.credentials.domains.DomainRequirement;
@@ -38,10 +38,10 @@ import hudson.util.ListBoxModel;
 import java.io.IOException;
 import jenkins.model.Jenkins;
 import jenkins.plugins.publish_over.BPValidators;
-import org.jenkinsci.plugins.publishoverdropbox.OneDriveToken;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxHostConfiguration;
-import org.jenkinsci.plugins.publishoverdropbox.impl.DropboxPublisherPlugin;
-import org.jenkinsci.plugins.publishoverdropbox.impl.Messages;
+import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveHostConfiguration;
+import org.jenkinsci.plugins.publishoveronedrive.impl.OneDrivePublisherPlugin;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -50,10 +50,10 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 @Extension
-public class OneDriveHostConfigurationDescriptor extends Descriptor<DropboxHostConfiguration> {
+public class OneDriveHostConfigurationDescriptor extends Descriptor<OneDriveHostConfiguration> {
 
     public OneDriveHostConfigurationDescriptor() {
-        super(DropboxHostConfiguration.class);
+        super(OneDriveHostConfiguration.class);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<DropboxHostC
     }
 
     public int getDefaultTimeout() {
-        return DropboxHostConfiguration.DEFAULT_TIMEOUT;
+        return OneDriveHostConfiguration.DEFAULT_TIMEOUT;
     }
 
     public FormValidation doCheckName(@QueryParameter final String value) {
@@ -80,7 +80,7 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<DropboxHostC
 
     public ListBoxModel doFillTokenItems() {
         ListBoxModel items = new ListBoxModel();
-        for (OneDriveToken token : getDropboxTokens()) {
+        for (OneDriveToken token : getOneDriveTokens()) {
             items.add(token.getDescription(), token.getId());
         }
         if (items.size() > 0) {
@@ -89,20 +89,20 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<DropboxHostC
         return items;
     }
 
-    private List<OneDriveToken> getDropboxTokens() {
+    private List<OneDriveToken> getOneDriveTokens() {
         return CredentialsProvider.lookupCredentials(OneDriveToken.class, Jenkins.getInstance(), null, (DomainRequirement) null);
     }
     
     /*
     public FormValidation doTestConnection(final StaplerRequest request, final StaplerResponse response) {
-        final DropboxPublisherPlugin.Descriptor pluginDescriptor = Jenkins.getInstance().getDescriptorByType(
-                DropboxPublisherPlugin.Descriptor.class);
+        final OneDrivePublisherPlugin.Descriptor pluginDescriptor = Jenkins.getInstance().getDescriptorByType(
+                OneDrivePublisherPlugin.Descriptor.class);
         return pluginDescriptor.doTestConnection(request, response);
     }
     */
     
     public FormValidation doTestConnection(@QueryParameter("name") final String name, @QueryParameter("token") final String token, @QueryParameter("remoteRootDir") final String dir) throws IOException, ServletException, OneDriveException {
-        //final DropboxTokenImpl pluginDescriptor = Jenkins.getInstance().getDescriptorByType(DropboxTokenImpl.Descriptor.class);
+        //final OneDriveTokenImpl pluginDescriptor = Jenkins.getInstance().getDescriptorByType(OneDriveTokenImpl.Descriptor.class);
         String refreshToken = null;
         List<OneDriveToken> tokens = CredentialsProvider.lookupCredentials(OneDriveToken.class, Jenkins.getInstance(), null, (DomainRequirement) null);
         for (OneDriveToken token2 : tokens) {

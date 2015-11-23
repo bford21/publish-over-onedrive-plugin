@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.model.Describable;
 import jenkins.model.Jenkins;
@@ -31,10 +31,10 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.jenkinsci.plugins.publishoverdropbox.descriptor.OneDriveTransferDescriptor;
+import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDriveTransferDescriptor;
 import org.kohsuke.stapler.DataBoundConstructor;
 
-public class DropboxTransfer extends BPTransfer implements Describable<DropboxTransfer> {
+public class OneDriveTransfer extends BPTransfer implements Describable<OneDriveTransfer> {
 
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class DropboxTransfer extends BPTransfer implements Describable<DropboxTr
     private final int pruneRootDays;
 
     @DataBoundConstructor
-    public DropboxTransfer(final String sourceFiles, final String excludes, final String remoteDirectory, final String removePrefix, final boolean remoteDirectorySDF, final boolean flatten, final boolean cleanRemote,
+    public OneDriveTransfer(final String sourceFiles, final String excludes, final String remoteDirectory, final String removePrefix, final boolean remoteDirectorySDF, final boolean flatten, final boolean cleanRemote,
                             final boolean pruneRoot, final int pruneRootDays) {
         super(sourceFiles, excludes, remoteDirectory, removePrefix, remoteDirectorySDF, flatten, cleanRemote, false, false, null);
         this.pruneRoot = pruneRoot;
@@ -73,7 +73,7 @@ public class DropboxTransfer extends BPTransfer implements Describable<DropboxTr
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxTransfer) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDriveTransfer) that).isEquals();
     }
 
     public int hashCode() {

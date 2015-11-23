@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.jenkinsci.plugins.publishoverdropbox.impl;
+package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.Extension;
 import hudson.model.Describable;
@@ -34,28 +34,30 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
-public class DropboxRetry extends Retry implements Describable<DropboxRetry> {
+public class OneDriveRetry extends Retry implements Describable<OneDriveRetry> {
 
 
     private static final long serialVersionUID = 1L;
 
     @DataBoundConstructor
-    public DropboxRetry(final int retries, final long retryDelay) {
+    public OneDriveRetry(final int retries, final long retryDelay) {
         super(retries, retryDelay);
     }
 
-    public DropboxRetryDescriptor getDescriptor() {
-        return Jenkins.getInstance().getDescriptorByType(DropboxRetryDescriptor.class);
+    public OneDriveRetryDescriptor getDescriptor() {
+        return Jenkins.getInstance().getDescriptorByType(OneDriveRetryDescriptor.class);
     }
+    
 
     public boolean equals(final Object that) {
         if (this == that) return true;
         if (that == null || getClass() != that.getClass()) return false;
 
-        return addToEquals(new EqualsBuilder(), (DropboxRetry) that).isEquals();
+        return addToEquals(new EqualsBuilder(), (OneDriveRetry) that).isEquals();
     }
 
     public int hashCode() {
@@ -67,7 +69,7 @@ public class DropboxRetry extends Retry implements Describable<DropboxRetry> {
     }
 
     @Extension
-    public static class DropboxRetryDescriptor extends Descriptor<DropboxRetry> {
+    public static class OneDriveRetryDescriptor extends Descriptor<OneDriveRetry> {
 
         @Override
         public String getDisplayName() {

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.publishoverdropbox.domain;
+package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 public class Config {
     /**
