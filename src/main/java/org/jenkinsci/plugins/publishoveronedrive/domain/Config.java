@@ -36,7 +36,7 @@ public class Config {
     static final String CLIENT_SECRET = "NNe3LAukrteNJZ7CEyitDJw2q2aHpBNl";
     private static String authorizeUrl = "https://login.live.com/oauth20_authorize.srf?client_id="+CLIENT_ID+"&scope=wl.signin%20wl.basic%20wl.offline_access%20wl.skydrive_update&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";
     //private static final String authorizeUrl = "https://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id=" + CLIENT_ID;
-
+    
     public static String getAuthorizeUrl() {
         return authorizeUrl;
     }

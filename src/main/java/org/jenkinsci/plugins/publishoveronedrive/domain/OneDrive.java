@@ -85,7 +85,8 @@ public class OneDrive {
     //private Folder workingFolder;
     private OneFolder workingFolder;
     
-    private static final OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK(Config.CLIENT_ID, Config.CLIENT_SECRET, "https://login.live.com/oauth20_desktop.srf", OneDriveScope.READWRITE);   
+    private static final OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK("https://login.live.com/oauth20_desktop.srf",OneDriveScope.READWRITE);
+    
     
     public OneDrive(String accessToken) {
         this.accessToken = accessToken;
