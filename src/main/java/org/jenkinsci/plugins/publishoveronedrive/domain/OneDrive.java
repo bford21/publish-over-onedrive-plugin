@@ -220,7 +220,7 @@ public class OneDrive {
           return folder;
      }
      
-    
+    /*
     public File storeFile(String name, InputStream content) throws IOException, OneDriveException {
         String absolute = createAbsolutePath(name);
         URL url;
@@ -231,7 +231,7 @@ public class OneDrive {
         } catch (IOException e) {
             // Ignore, assume file doesn't exist
         }
-        /*
+        
         try {
             final URLBuilder builder = new URLBuilder(URL_FILE_UPLOAD);
             builder.appendPath(absolute)
@@ -252,16 +252,16 @@ public class OneDrive {
         request.sign(accessToken);
 
         return request.execute();
-        */
+        
         return null;
         
     }
-    /*
+    */
     public boolean storeFile(String name, InputStream content) throws IOException{
         
-        // Needs to be passed file (Might need to change Params
-        java.io.File oneDriveTestFile = new java.io.File("");
-        
+        // Needs to be passed file 
+        java.io.File oneDriveTestFile = new java.io.File(name);
+        //System.out.println(content);
         try{
          sdk.getRootFolder().uploadFile(oneDriveTestFile).startUpload();
         }catch (OneDriveException ex) {
@@ -269,7 +269,7 @@ public class OneDrive {
         }
         return true; 
     }
-    */
+    
     /*
     public void cleanFolder() throws IOException {
         if (workingFolder.isDir()) {

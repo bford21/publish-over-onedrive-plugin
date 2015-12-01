@@ -107,15 +107,32 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
             }
         }
     }
-
+    
+    
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
-            onedrive.storeFile(filePath.getName(), content);
+            
+            onedrive.storeFile(filePath.getRemote(), content);
         } catch (IOException ioe) {
             throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);
         }
     }
-
+    
+    
+    /*
+    public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException{
+        try{
+           
+            //java.io.File file = new java.io.File("/Users/brianford/Downloads/debian-7.9.0-powerpc-netinst.iso");
+            java.io.File file = new java.io.File(filePath.getName());
+            onedrive.storeFile(file);
+            
+        }catch(IOException ioe){
+            throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);
+        }
+        
+    }
+    */
     public boolean connect() throws OneDriveException {
         try {
             return onedrive.isConnected() || onedrive.connect();
@@ -159,4 +176,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     public int getTimeout() {
         return onedrive.getTimeout();
     }
+
+   
+
 }

@@ -101,8 +101,9 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
         configureOneDriveClient(client);
         connect(client);
         
-        
-       // client.changeDirectory("/BRIAN");
+        //java.io.File file = new java.io.File("/Users/brianford/Downloads/debian-7.9.0-powerpc-netinst.iso");
+        //client.transferFile();
+        // client.changeDirectory("/BRIAN");
         //client.makeDirectory("BRIAN");
         
         changeToRootDirectory(client);
