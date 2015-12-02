@@ -111,7 +111,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
-            
+            transfer.getPatternSeparator();
             onedrive.storeFile(filePath.getRemote(), content);
         } catch (IOException ioe) {
             throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);

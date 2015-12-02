@@ -257,10 +257,10 @@ public class OneDrive {
         
     }
     */
-    public boolean storeFile(String name, InputStream content) throws IOException{
+    public boolean storeFile(String path, InputStream content) throws IOException{
         
         // Needs to be passed file 
-        java.io.File oneDriveTestFile = new java.io.File(name);
+        java.io.File oneDriveTestFile = new java.io.File(path);
         //System.out.println(content);
         try{
          sdk.getRootFolder().uploadFile(oneDriveTestFile).startUpload();
