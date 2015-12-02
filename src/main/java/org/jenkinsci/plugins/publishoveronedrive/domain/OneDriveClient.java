@@ -108,7 +108,6 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
     
-    
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
             transfer.getPatternSeparator();

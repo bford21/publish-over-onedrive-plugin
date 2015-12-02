@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jenkinsci.plugins.publishoveronedrive.domain.model.BaseFile;
 
 
 public class OneDrive {
@@ -319,6 +320,7 @@ public class OneDrive {
     */
     public void pruneFolder(String absoluteRemoteRoot, int pruneRootDays) throws IOException, RestException, OneDriveException {
         SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US); 
+         
     }
     
     /*
