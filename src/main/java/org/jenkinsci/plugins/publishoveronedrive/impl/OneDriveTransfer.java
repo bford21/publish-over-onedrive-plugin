@@ -40,12 +40,12 @@ public class OneDriveTransfer extends BPTransfer implements Describable<OneDrive
     private static final long serialVersionUID = 1L;
     private final boolean pruneRoot;
     private final int pruneRootDays;
-    private final String patternSeparator = "[,]";
+    //private final String patternSeparator = ",";
 
     @DataBoundConstructor
     public OneDriveTransfer(final String sourceFiles, final String excludes, final String remoteDirectory, final String removePrefix, final boolean remoteDirectorySDF, final boolean flatten, final boolean cleanRemote,
                             final boolean pruneRoot, final int pruneRootDays, final String patternSeparator) {
-        super(sourceFiles, excludes, remoteDirectory, removePrefix, remoteDirectorySDF, flatten, cleanRemote, false, false, patternSeparator);
+        super(sourceFiles, excludes, remoteDirectory, removePrefix, remoteDirectorySDF, flatten, cleanRemote, false, false, null);
         this.pruneRoot = pruneRoot;
         this.pruneRootDays = pruneRootDays;
     }
