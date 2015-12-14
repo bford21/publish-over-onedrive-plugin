@@ -32,7 +32,6 @@ import jenkins.plugins.publish_over.BPDefaultClient;
 import jenkins.plugins.publish_over.BapPublisherException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jenkinsci.plugins.publishoveronedrive.domain.model.Folder;
 import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveTransfer;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
@@ -40,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
 
 public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
 
@@ -110,8 +108,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
-            transfer.getPatternSeparator();
-            onedrive.storeFile(filePath.getRemote(), content);
+            onedrive.storeFile(filePath.getRemote());
         } catch (IOException ioe) {
             throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);
         }

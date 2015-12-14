@@ -24,7 +24,6 @@
 
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
-import org.jenkinsci.plugins.publishoveronedrive.domain.model.File;
 import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
 import org.jenkinsci.plugins.publishoveronedrive.domain.model.TokenResponse;
 import org.jenkinsci.plugins.publishoveronedrive.domain.model.AccountInfo;
@@ -39,19 +38,15 @@ import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jenkinsci.plugins.publishoveronedrive.domain.model.BaseFile;
 
 
 public class OneDrive {
@@ -104,9 +99,10 @@ public class OneDrive {
     public boolean connect() throws IOException, OneDriveException {
         //userInfo = retrieveAccountInfo(accessToken);
        // return isConnected();
-        try{
+        System.out.println ("*** connect");
+        try {
             sdk.authenticateWithRefreshToken(accessToken);
-        }catch(OneDriveException ex) {
+        } catch(OneDriveException ex) {
             throw new OneDriveException("Error connecting to OneDrive, could not be authenticated." + ex);
         }
         return isConnected();
@@ -118,6 +114,9 @@ public class OneDrive {
     }
 
     public boolean changeWorkingDirectory(String relative) throws IOException, RestException, OneDriveException {
+        
+        System.out.println ("*** changeWorkingDirectory: " + relative);
+
         boolean hasSuccess = true;
         try {
             if (!StringUtils.isEmpty(relative)) {
@@ -215,7 +214,9 @@ public class OneDrive {
     }
     */
      public OneFolder makeDirectory(String dirName) throws IOException, OneDriveException {
-          //String absolute = createAbsolutePath(relative);
+         System.out.println ("*** makeDirectory: " + dirName);
+
+         //String absolute = createAbsolutePath(relative);
           OneFolder folder = sdk.getRootFolder().createFolder(dirName);
           return folder;
      }
@@ -257,17 +258,16 @@ public class OneDrive {
         
     }
     */
-    public boolean storeFile(String path, InputStream content) throws IOException{
-        
-        // Needs to be passed fill
+    public boolean storeFile(String path) throws IOException{
+        System.out.println ("*** storeFile " + path);
+
         java.io.File oneDriveTestFile = new java.io.File(path);
-       
-  
-        try{
-            sdk.getRootFolder().uploadFile(oneDriveTestFile).startUpload();
-        }catch (OneDriveException ex) {
+
+        try {
+            sdk.getFolderByPath(workingFolder.getName()).uploadFile(oneDriveTestFile).startUpload();
+        } catch (OneDriveException ex) {
             Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (IOException io){
+        } catch (IOException io) {
              Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, io);
         }
         return true; 
