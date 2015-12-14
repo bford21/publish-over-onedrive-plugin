@@ -122,7 +122,6 @@ public class OneDrive {
         try {
             if (!StringUtils.isEmpty(relative)) {
                 workingFolder = retrieveFolderMetaData(relative);
-               
             }
         } catch (IOException e) {
             hasSuccess = false;
@@ -262,11 +261,14 @@ public class OneDrive {
         
         // Needs to be passed fill
         java.io.File oneDriveTestFile = new java.io.File(path);
-        //System.out.println(content);
+       
+  
         try{
             sdk.getRootFolder().uploadFile(oneDriveTestFile).startUpload();
         }catch (OneDriveException ex) {
             Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (IOException io){
+             Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, io);
         }
         return true; 
     }
@@ -479,7 +481,7 @@ public class OneDrive {
         } else {
             // relative paths are prefix with the working folder
             if (workingFolder != null) {
-                sb.append(workingFolder.getPath());
+               // sb.append(workingFolder.getPath());
             }
 
             // When working folder is the root the path could end with '/'
@@ -495,6 +497,7 @@ public class OneDrive {
     /*
     Method accepts a OneDrive folder as a parameter and returns 
     */
+    /*
     private String getPath(OneFolder folder) throws IOException, OneDriveException{
         OneFolder path;
         try{
@@ -506,4 +509,5 @@ public class OneDrive {
         
         return path;
     }
+    */
 }
