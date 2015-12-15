@@ -23,18 +23,45 @@
  */
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Config {
 
     /**
      * @see Config#CLIENT_ID
      */
-    
-    /* TODO: Remove when finalized */
-    static final String CLIENT_SECRET = "NNe3LAukrteNJZ7CEyitDJw2q2aHpBNl";
-    static final String CLIENT_ID = "0000000048170EFD";
-    private static String authorizeUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" + CLIENT_ID + "&scope=wl.signin%20wl.basic%20wl.offline_access%20wl.skydrive_update&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";
+    static String CLIENT_ID = "";
+    static String CLIENT_SECRET = "";
 
-    public static String getAuthorizeUrl() {
-        return authorizeUrl;
+    private static final String AUTHORIZE_URI = "https://login.live.com/oauth20_authorize.srf";
+    private static final String REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf";
+
+    // Necessary if CLIENT_SECRET were private
+    public static void setClientSecret(String secret) {
+        CLIENT_SECRET = secret;
+    }
+
+    public static String getAuthorizeUrl(String clientId) {
+        CLIENT_ID = clientId;
+
+        final String[] scopes = {"wl.signin", "wl.basic", "wl.offline_access", "wl.skydrive_update"};
+
+        // TODO: Test that this URL is correct
+        try {
+            String queryString = new FormBuilder()
+                    .appendQueryParameter("client_id", clientId)
+                    .appendQueryParameter("scope", String.join(" ", scopes))
+                    .appendQueryParameter("response_type", "code")
+                    .appendQueryParameter("redirect_uri", REDIRECT_URI).toString();
+
+            return AUTHORIZE_URI + '?' + queryString;
+
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
     }
 }
