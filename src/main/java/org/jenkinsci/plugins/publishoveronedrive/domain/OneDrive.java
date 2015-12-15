@@ -88,7 +88,7 @@ public class OneDrive {
         boolean hasSuccess = true;
         try {
             if (!StringUtils.isEmpty(relative)) {
-                workingFolder = retrieveFolderMetaData(relative);
+                workingFolder = retrieveFolder(relative);
             }
         } catch (IOException e) {
             hasSuccess = false;
@@ -101,12 +101,12 @@ public class OneDrive {
         return true;
     }
 
-    private OneFolder retrieveFolderMetaData(String path) throws RestException, IOException, OneDriveException {
+    private OneFolder retrieveFolder(String path) throws RestException, IOException, OneDriveException {
         OneFolder folder = sdk.getFolderByPath(path);
         return folder;
     }
 
-    private OneFile retrieveFileMetaData(String path) throws IOException, OneDriveException {
+    private OneFile retrieveFile(String path) throws IOException, OneDriveException {
         OneFile file = sdk.getFileByPath(path);
         return file;
     }
