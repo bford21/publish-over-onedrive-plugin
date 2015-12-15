@@ -259,12 +259,12 @@ public class OneDrive {
     }
     */
     public boolean storeFile(String path) throws IOException{
-        System.out.println ("*** storeFile " + path);
+        System.out.println("*** storeFile " + path);
 
-        java.io.File oneDriveTestFile = new java.io.File(path);
+        java.io.File file = new java.io.File(path);
 
         try {
-            sdk.getFolderByPath(workingFolder.getName()).uploadFile(oneDriveTestFile).startUpload();
+            sdk.getFolderById(workingFolder.getId()).uploadFile(file).startUpload();
         } catch (OneDriveException ex) {
             Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException io) {
