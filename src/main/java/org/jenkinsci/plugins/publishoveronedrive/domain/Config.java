@@ -28,6 +28,7 @@ public class Config {
     /**
      * @see Config#CLIENT_ID
      */
+    
     /* TODO: Remove when finalized */
     static final String CLIENT_SECRET = "NNe3LAukrteNJZ7CEyitDJw2q2aHpBNl";
     static final String CLIENT_ID = "0000000048170EFD";

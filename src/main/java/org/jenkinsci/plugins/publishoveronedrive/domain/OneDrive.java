@@ -81,19 +81,19 @@ public class OneDrive {
         return sdk.isAuthenticated();
     }
 
-    public boolean changeWorkingDirectory(String relative) throws IOException, RestException, OneDriveException {
+    public boolean changeWorkingDirectory(String path) throws IOException, RestException, OneDriveException {
 
-        System.out.println("*** changeWorkingDirectory: " + relative);
+        System.out.println("*** changeWorkingDirectory: " + path);
 
-        boolean hasSuccess = true;
+        boolean success = true;
         try {
-            if (!StringUtils.isEmpty(relative)) {
-                workingFolder = retrieveFolder(relative);
+            if (!StringUtils.isEmpty(path)) {
+                workingFolder = retrieveFolder(path);
             }
         } catch (IOException e) {
-            hasSuccess = false;
+            success = false;
         }
-        return hasSuccess && workingFolder != null;
+        return success && workingFolder != null;
     }
 
     public boolean disconnect() throws OneDriveException, IOException {

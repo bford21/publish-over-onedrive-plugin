@@ -43,13 +43,7 @@ import java.util.List;
 public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publisher> {
 
     private final CopyOnWriteList<OneDriveHostConfiguration> hostConfigurations = new CopyOnWriteList<OneDriveHostConfiguration>();
-    /**
-     * null - prevent complaints from xstream
-     */
     private BPPluginDescriptor.BPDescriptorMessages msg;
-    /**
-     * null - prevent complaints from xstream
-     */
     private Class hostConfigClass;
 
     public OneDrivePublisherPluginDescriptor() {
@@ -137,7 +131,6 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
     }
 
     public Object readResolve() {
-        // nuke the legacy config
         msg = null;
         hostConfigClass = null;
         return this;

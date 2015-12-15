@@ -77,11 +77,4 @@ public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriv
     public static class Descriptor extends OneDrivePublisherPluginDescriptor {
     }
 
-    /**
-     * left in to prevent xstream noise
-     */
-    @Deprecated
-    public static class DescriptorMessages implements BPPluginDescriptor.BPDescriptorMessages {
-    }
-
 }

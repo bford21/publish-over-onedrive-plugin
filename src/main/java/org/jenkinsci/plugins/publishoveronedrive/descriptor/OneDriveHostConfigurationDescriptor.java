@@ -104,7 +104,7 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<OneDriveHost
             sdk.authenticateWithRefreshToken(refreshToken);
             OneFolder rootFolder = sdk.getRootFolder();
             System.out.println(rootFolder);
-            return FormValidation.ok("Succesfully authenticated using token: " + refreshToken);
+            return FormValidation.ok("Succesfully authenticated using token!");
         } catch (OneDriveException ex) {
             return FormValidation.error("Error authenticating using token: " + refreshToken);
         }
