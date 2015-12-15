@@ -48,17 +48,8 @@ public class OneDrive {
     private static final String URL_TOKEN = "https://login.live.com/oauth20_token.srf?";
     private static final String REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf";
     private static final Gson gson = new Gson();
-    public static final String PARAM_ROOT = "root";
-    public static final String PARAM_PATH = "path";
-    public static final String PARAM_LOCALE = "locale";
     public static final String PATH_SEPERATOR = "/";
-    public static final String PARAM_OVERWRITE = "overwrite";
-    public static final String PARAM_AUTORENAME = "autorename";
-    public static final String PARAM_PARENT_REV = "parent_rev";
-    public static final String VALUE_TRUE = "true";
-    public static final String VALUE_FALSE = "false";
     public static final String VALUE_AUTHORIZATION_CODE = "authorization_code";
-    public static final long MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
     private final String accessToken;
     private int timeout = -1;
     private OneFolder workingFolder;
@@ -110,22 +101,18 @@ public class OneDrive {
         return true;
     }
 
-    private OneFolder retrieveFolderMetaData(String relative) throws RestException, IOException, OneDriveException {
-        String absolute = createAbsolutePath(relative);
-        OneFolder folder = sdk.getFolderByPath(absolute);
+    private OneFolder retrieveFolderMetaData(String path) throws RestException, IOException, OneDriveException {
+        OneFolder folder = sdk.getFolderByPath(path);
         return folder;
     }
 
-    private OneFile retrieveFileMetaData(String relative) throws IOException, OneDriveException {
-        String absolute = createAbsolutePath(relative);
-        OneFile file = sdk.getFileByPath(absolute);
+    private OneFile retrieveFileMetaData(String path) throws IOException, OneDriveException {
+        OneFile file = sdk.getFileByPath(path);
         return file;
     }
 
     public OneFolder makeDirectory(String dirName) throws IOException, OneDriveException {
         System.out.println("*** makeDirectory: " + dirName);
-
-        //String absolute = createAbsolutePath(relative);
         OneFolder folder = sdk.getRootFolder().createFolder(dirName);
         return folder;
     }
@@ -201,26 +188,5 @@ public class OneDrive {
             throw new RestException(Messages.exception_onedrive_url(), e);
         }
         return url;
-    }
-
-    private String createAbsolutePath(final String path) {
-        StringBuilder sb = new StringBuilder();
-        if (path.startsWith(PATH_SEPERATOR)) {
-            // paths starting with / are already absolute
-            sb.append(path);
-        } else {
-            // relative paths are prefix with the working folder
-            if (workingFolder != null) {
-                // sb.append(workingFolder.getPath());
-            }
-
-            // When working folder is the root the path could end with '/'
-            if (sb.length() == 0 || !PATH_SEPERATOR.equals(sb.substring(sb.length() - 1))) {
-                sb.append(PATH_SEPERATOR);
-            }
-            sb.append(path);
-        }
-
-        return sb.toString();
     }
 }
