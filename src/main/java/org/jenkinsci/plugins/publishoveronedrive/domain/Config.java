@@ -28,6 +28,7 @@ public class Config {
     /**
      * @see Config#CLIENT_ID
      */
+    /* TODO: Remove when finalized */
     static final String CLIENT_SECRET = "NNe3LAukrteNJZ7CEyitDJw2q2aHpBNl";
     static final String CLIENT_ID = "0000000048170EFD";
     private static String authorizeUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" + CLIENT_ID + "&scope=wl.signin%20wl.basic%20wl.offline_access%20wl.skydrive_update&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";

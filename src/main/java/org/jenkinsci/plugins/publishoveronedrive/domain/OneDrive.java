@@ -106,12 +106,8 @@ public class OneDrive {
     }
 
     public boolean disconnect() throws OneDriveException, IOException {
-        try {
-            sdk.disconnect();
-            return true;
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
+        sdk.disconnect();
+        return true;
     }
 
     private OneFolder retrieveFolderMetaData(String relative) throws RestException, IOException, OneDriveException {
@@ -150,16 +146,10 @@ public class OneDrive {
     }
 
     public void cleanFolder() throws IOException, OneDriveException {
-        // get contents of entire folder
-        // delete all files in folder that are not directories
         String id = workingFolder.getId();
         List<OneFile> files = sdk.getFolderById(id).getChildFiles();
         for (OneFile file : files) {
-            try {
-                file.delete();
-            } catch (OneDriveException e) {
-                throw new OneDriveException("Error deleting file from OneDrive. " + e);
-            }
+            file.delete();
         }
     }
 
