@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive;
 
 import com.cloudbees.plugins.credentials.CredentialsNameProvider;
@@ -30,7 +29,6 @@ import com.cloudbees.plugins.credentials.common.StandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Util;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
-
 import javax.annotation.Nonnull;
 
 @NameWith(OneDriveToken.NameProvider.class)

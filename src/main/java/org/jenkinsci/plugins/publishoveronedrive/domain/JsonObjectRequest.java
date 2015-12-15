@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import com.google.gson.Gson;
@@ -29,7 +28,6 @@ import org.apache.commons.io.IOUtils;
 import org.jenkinsci.plugins.publishoveronedrive.domain.model.BaseResponse;
 import org.jenkinsci.plugins.publishoveronedrive.domain.model.RestException;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -75,7 +73,6 @@ public class JsonObjectRequest<T> {
             // Ignored
         }
     }
-
 
     public T execute() throws RestException {
         T model;

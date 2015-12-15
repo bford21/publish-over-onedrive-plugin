@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.Extension;
@@ -37,9 +36,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 public class OneDrivePublisherLabel extends PublisherLabel implements Describable<OneDrivePublisherLabel> {
 
-
-    private static final long serialVersionUID = 1L;
-
     @DataBoundConstructor
     public OneDrivePublisherLabel(final String label) {
         super(label);
@@ -50,8 +46,12 @@ public class OneDrivePublisherLabel extends PublisherLabel implements Describabl
     }
 
     public boolean equals(final Object that) {
-        if (this == that) return true;
-        if (that == null || getClass() != that.getClass()) return false;
+        if (this == that) {
+            return true;
+        }
+        if (that == null || getClass() != that.getClass()) {
+            return false;
+        }
 
         return addToEquals(new EqualsBuilder(), (OneDrivePublisherLabel) that).isEquals();
     }
@@ -75,6 +75,5 @@ public class OneDrivePublisherLabel extends PublisherLabel implements Describabl
         public jenkins.plugins.publish_over.view_defaults.PublisherLabel.Messages getCommonFieldNames() {
             return new jenkins.plugins.publish_over.view_defaults.PublisherLabel.Messages();
         }
-
     }
 }

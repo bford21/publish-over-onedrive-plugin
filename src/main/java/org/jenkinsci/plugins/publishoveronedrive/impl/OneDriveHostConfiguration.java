@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import com.cloudbees.plugins.credentials.CredentialsProvider;
@@ -41,17 +40,14 @@ import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDriveHostConfigur
 import org.jenkinsci.plugins.publishoveronedrive.domain.OneDrive;
 import org.jenkinsci.plugins.publishoveronedrive.domain.OneDriveClient;
 import org.kohsuke.stapler.DataBoundConstructor;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClient, Object> implements Describable<OneDriveHostConfiguration> {
 
     public static final int DEFAULT_TIMEOUT = 300000;
-    private static final long serialVersionUID = 1L;
     private OneDriveToken token;
     private final int timeout;
 
@@ -145,8 +141,12 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
     }
 
     public boolean equals(final Object that) {
-        if (this == that) return true;
-        if (that == null || getClass() != that.getClass()) return false;
+        if (this == that) {
+            return true;
+        }
+        if (that == null || getClass() != that.getClass()) {
+            return false;
+        }
 
         return addToEquals(new EqualsBuilder(), (OneDriveHostConfiguration) that).isEquals();
     }
@@ -158,6 +158,5 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }
-
 
 }

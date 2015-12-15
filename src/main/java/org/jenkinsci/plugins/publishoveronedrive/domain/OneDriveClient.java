@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import de.tuberlin.onedrivesdk.OneDriveException;
@@ -34,7 +33,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveTransfer;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -91,21 +89,6 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
 
-    public void beginTransfers(final OneDriveTransfer transfer) {
-        if (!transfer.hasConfiguredSourceFiles()) {
-            throw new BapPublisherException(Messages.exception_noSourceFiles());
-        }
-        if (transfer.isRemoteDirectorySDF() && transfer.isPruneRoot()) {
-            try {
-                onedrive.pruneFolder(getAbsoluteRemoteRoot(), transfer.getPruneRootDays());
-            } catch (IOException ioe) {
-                throw new BapPublisherException(Messages.exception_failedToStoreFile("Pruning failed"), ioe);
-            } catch (OneDriveException ex) {
-                Logger.getLogger(OneDriveClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
             onedrive.storeFile(filePath.getRemote());
@@ -113,22 +96,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
             throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);
         }
     }
-    
-    
-    /*
-    public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException{
-        try{
-           
-            //java.io.File file = new java.io.File("/Users/brianford/Downloads/debian-7.9.0-powerpc-netinst.iso");
-            java.io.File file = new java.io.File(filePath.getName());
-            onedrive.storeFile(file);
-            
-        }catch(IOException ioe){
-            throw new BapPublisherException(Messages.exception_failedToStoreFile("Storing failed"), ioe);
-        }
-        
-    }
-    */
+
     public boolean connect() throws OneDriveException {
         try {
             return onedrive.isConnected() || onedrive.connect();
@@ -172,7 +140,5 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     public int getTimeout() {
         return onedrive.getTimeout();
     }
-
-   
 
 }

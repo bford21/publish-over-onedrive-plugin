@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 import java.io.UnsupportedEncodingException;
 import java.net.*;
 
 class URLBuilder {
+
     String scheme = "";
     String host = "";
     String path = "";
     String query = "";
-
 
     public URLBuilder(String uri) throws URISyntaxException {
         URI parseUri = new URI(uri);

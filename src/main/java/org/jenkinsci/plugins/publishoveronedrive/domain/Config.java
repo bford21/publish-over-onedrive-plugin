@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,19 +24,14 @@
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
 public class Config {
-    /**
-     * Generate these values by creating your own Dropbox app registration on https://www.dropbox.com/developers/apps
-     * <br/>
-     * Replace the strings values in this file to run your own compiled version of the plugin
-     */
-    static final String CLIENT_ID = "0000000048170EFD";
+
     /**
      * @see Config#CLIENT_ID
      */
     static final String CLIENT_SECRET = "NNe3LAukrteNJZ7CEyitDJw2q2aHpBNl";
-    private static String authorizeUrl = "https://login.live.com/oauth20_authorize.srf?client_id="+CLIENT_ID+"&scope=wl.signin%20wl.basic%20wl.offline_access%20wl.skydrive_update&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";
-    //private static final String authorizeUrl = "https://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id=" + CLIENT_ID;
-    
+    static final String CLIENT_ID = "0000000048170EFD";
+    private static String authorizeUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" + CLIENT_ID + "&scope=wl.signin%20wl.basic%20wl.offline_access%20wl.skydrive_update&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";
+
     public static String getAuthorizeUrl() {
         return authorizeUrl;
     }

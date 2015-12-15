@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.model.Describable;
@@ -36,15 +35,12 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 public class OneDriveTransfer extends BPTransfer implements Describable<OneDriveTransfer> {
 
-
-    private static final long serialVersionUID = 1L;
     private final boolean pruneRoot;
     private final int pruneRootDays;
-    //private final String patternSeparator = ",";
 
     @DataBoundConstructor
     public OneDriveTransfer(final String sourceFiles, final String excludes, final String remoteDirectory, final String removePrefix, final boolean remoteDirectorySDF, final boolean flatten, final boolean cleanRemote,
-                            final boolean pruneRoot, final int pruneRootDays, final String patternSeparator) {
+            final boolean pruneRoot, final int pruneRootDays, final String patternSeparator) {
         super(sourceFiles, excludes, remoteDirectory, removePrefix, remoteDirectorySDF, flatten, cleanRemote, false, false, null);
         this.pruneRoot = pruneRoot;
         this.pruneRootDays = pruneRootDays;
@@ -71,8 +67,12 @@ public class OneDriveTransfer extends BPTransfer implements Describable<OneDrive
     }
 
     public boolean equals(final Object that) {
-        if (this == that) return true;
-        if (that == null || getClass() != that.getClass()) return false;
+        if (this == that) {
+            return true;
+        }
+        if (that == null || getClass() != that.getClass()) {
+            return false;
+        }
 
         return addToEquals(new EqualsBuilder(), (OneDriveTransfer) that).isEquals();
     }
@@ -84,6 +84,5 @@ public class OneDriveTransfer extends BPTransfer implements Describable<OneDrive
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }
-
 
 }

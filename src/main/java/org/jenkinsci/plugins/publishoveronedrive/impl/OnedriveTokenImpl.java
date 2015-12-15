@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import com.cloudbees.plugins.credentials.CredentialsScope;
@@ -31,10 +30,8 @@ import hudson.Extension;
 import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
 import org.jenkinsci.plugins.publishoveronedrive.domain.OneDrive;
 import org.kohsuke.stapler.DataBoundConstructor;
-
 import javax.annotation.Nonnull;
 import java.io.IOException;
-import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 
 public class OnedriveTokenImpl extends BaseStandardCredentials implements OneDriveToken {
 

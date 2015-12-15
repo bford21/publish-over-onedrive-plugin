@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (C) 2015 by René de Groot
+ * Copyright (C) 2015 by Brian Ford, Xamarin Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package org.jenkinsci.plugins.publishoveronedrive.impl;
 
 import hudson.Extension;
@@ -35,23 +34,24 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.jenkinsci.plugins.publishoveronedrive.descriptor.OneDrivePublisherPluginDescriptor;
 import org.jenkinsci.plugins.publishoveronedrive.domain.OneDriveClient;
 import org.kohsuke.stapler.DataBoundConstructor;
-
 import java.util.ArrayList;
 
 public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriveClient, Object> {
 
-    private static final long serialVersionUID = 1L;
-
     @DataBoundConstructor
     public OneDrivePublisherPlugin(final ArrayList<OneDrivePublisher> publishers, final boolean continueOnError, final boolean failOnError,
-                                  final boolean alwaysPublishFromMaster, final String masterNodeName) {
+            final boolean alwaysPublishFromMaster, final String masterNodeName) {
         super(Messages.console_message_prefix(), publishers, continueOnError, failOnError, alwaysPublishFromMaster, masterNodeName,
                 null);
     }
 
     public boolean equals(final Object that) {
-        if (this == that) return true;
-        if (that == null || getClass() != that.getClass()) return false;
+        if (this == that) {
+            return true;
+        }
+        if (that == null || getClass() != that.getClass()) {
+            return false;
+        }
 
         return addToEquals(new EqualsBuilder(), (OneDrivePublisherPlugin) that).isEquals();
     }
