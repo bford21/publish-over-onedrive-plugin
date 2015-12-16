@@ -27,13 +27,14 @@ import com.cloudbees.plugins.credentials.CredentialsScope;
 import com.cloudbees.plugins.credentials.impl.BaseStandardCredentials;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
+import hudson.model.Describable;
 import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
 import org.jenkinsci.plugins.publishoveronedrive.domain.OneDrive;
 import org.kohsuke.stapler.DataBoundConstructor;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 
-public class OnedriveTokenImpl extends BaseStandardCredentials implements OneDriveToken {
+public class OneDriveTokenImpl extends BaseStandardCredentials implements OneDriveToken, Describable<OneDriveTokenImpl> {
 
     @Nonnull
     private final String authorizationCode;
@@ -41,7 +42,7 @@ public class OnedriveTokenImpl extends BaseStandardCredentials implements OneDri
     private final String accessCode;
 
     @DataBoundConstructor
-    public OnedriveTokenImpl(CredentialsScope scope, String id, @Nonnull String authorizationCode, String description) throws IOException {
+    public OneDriveTokenImpl(CredentialsScope scope, String id, @Nonnull String authorizationCode, String description) throws IOException {
         super(scope, id, description);
         this.authorizationCode = authorizationCode;
         this.accessCode = OneDrive.convertAuthorizationToAccessCode(authorizationCode);

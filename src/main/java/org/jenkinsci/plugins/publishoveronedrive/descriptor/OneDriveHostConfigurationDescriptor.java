@@ -29,7 +29,6 @@ import de.tuberlin.onedrivesdk.OneDriveException;
 import de.tuberlin.onedrivesdk.OneDriveFactory;
 import de.tuberlin.onedrivesdk.OneDriveSDK;
 import de.tuberlin.onedrivesdk.common.OneDriveScope;
-import de.tuberlin.onedrivesdk.folder.OneFolder;
 import hudson.Extension;
 import hudson.model.Descriptor;
 import hudson.util.FormValidation;
@@ -102,8 +101,7 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<OneDriveHost
 
         try {
             sdk.authenticateWithRefreshToken(refreshToken);
-            OneFolder rootFolder = sdk.getRootFolder();
-            System.out.println(rootFolder);
+            sdk.isAuthenticated();
             return FormValidation.ok("Succesfully authenticated using token!");
         } catch (OneDriveException ex) {
             return FormValidation.error("Error authenticating using token: " + refreshToken);
