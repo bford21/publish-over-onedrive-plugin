@@ -49,7 +49,7 @@ public class OneDrive {
     private final String accessToken;
     private int timeout = -1;
     private OneFolder workingFolder;
-    private static final OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK(Config.CLIENT_ID, Config.CLIENT_SECRET, Config.REDIRECT_URI, OneDriveScope.READWRITE);
+    private static OneDriveSDK sdk = null;
 
     public OneDrive(String accessToken) {
         this.accessToken = accessToken;
@@ -66,6 +66,7 @@ public class OneDrive {
     public boolean connect() throws IOException, OneDriveException {
         System.out.println("*** connect");
         try {
+            sdk = OneDriveFactory.createOneDriveSDK(Config.CLIENT_ID, Config.CLIENT_SECRET, Config.REDIRECT_URI, OneDriveScope.READWRITE);
             sdk.authenticateWithRefreshToken(accessToken);
         } catch (OneDriveException ex) {
             throw new OneDriveException("Error connecting to OneDrive, could not be authenticated." + ex);

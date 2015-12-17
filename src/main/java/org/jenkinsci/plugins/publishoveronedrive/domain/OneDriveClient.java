@@ -23,6 +23,8 @@
  */
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
+import com.cloudbees.plugins.credentials.CredentialsProvider;
+import com.cloudbees.plugins.credentials.domains.DomainRequirement;
 import de.tuberlin.onedrivesdk.OneDriveException;
 import de.tuberlin.onedrivesdk.folder.OneFolder;
 import hudson.FilePath;
@@ -35,8 +37,11 @@ import org.jenkinsci.plugins.publishoveronedrive.impl.OneDriveTransfer;
 import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jenkins.model.Jenkins;
+import org.jenkinsci.plugins.publishoveronedrive.OneDriveToken;
 
 public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
 
@@ -56,6 +61,18 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
 
     public void setBuildInfo(final BPBuildInfo buildInfo) {
         this.buildInfo = buildInfo;
+    }
+
+    public boolean setClientIdAndSecret() throws IOException, OneDriveException {
+        List<OneDriveToken> credentials = CredentialsProvider.lookupCredentials(OneDriveToken.class, Jenkins.getInstance(), null, (DomainRequirement) null);
+        for (OneDriveToken token : credentials) {
+            if (!token.getClientId().equals("") && !token.getClientSecret().equals("")) {
+                Config.CLIENT_ID = token.getClientId();
+                Config.CLIENT_SECRET = token.getClientSecret();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -101,9 +118,10 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
 
-    public boolean connect() throws OneDriveException {
+    public boolean connect() throws OneDriveException, IOException {
+        setClientIdAndSecret();
         try {
-            return onedrive.isConnected() || onedrive.connect();
+            return onedrive.connect();
         } catch (IOException ioe) {
             throw new BapPublisherException(Messages.exception_exceptionOnDisconnect(ioe.getLocalizedMessage()), ioe);
         }
