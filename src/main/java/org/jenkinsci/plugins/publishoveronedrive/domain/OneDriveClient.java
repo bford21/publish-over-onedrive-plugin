@@ -58,6 +58,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         this.buildInfo = buildInfo;
     }
 
+    @Override
     public boolean changeDirectory(final String directory) {
         try {
             return onedrive.changeWorkingDirectory(directory);
@@ -69,6 +70,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         return false;
     }
 
+    @Override
     public boolean makeDirectory(final String directory) {
         try {
             OneFolder folder = onedrive.makeDirectory(directory);
@@ -81,6 +83,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         return false;
     }
 
+    @Override
     public void deleteTree() throws OneDriveException {
         try {
             onedrive.cleanFolder();
@@ -89,6 +92,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
 
+    @Override
     public void transferFile(final OneDriveTransfer transfer, final FilePath filePath, final InputStream content) throws OneDriveException {
         try {
             onedrive.storeFile(filePath.getRemote());
@@ -105,6 +109,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
 
+    @Override
     public void disconnect() throws OneDriveException {
         if ((onedrive != null) && onedrive.isConnected()) {
             try {
@@ -115,6 +120,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
         }
     }
 
+    @Override
     public void disconnectQuietly() {
         try {
             onedrive.disconnect();
@@ -140,5 +146,4 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     public int getTimeout() {
         return onedrive.getTimeout();
     }
-
 }

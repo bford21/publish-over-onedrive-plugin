@@ -41,10 +41,12 @@ public class OneDrivePublisherLabel extends PublisherLabel implements Describabl
         super(label);
     }
 
+    @Override
     public OneDrivePublisherLabelDescriptor getDescriptor() {
         return Jenkins.getInstance().getDescriptorByType(OneDrivePublisherLabelDescriptor.class);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -56,10 +58,12 @@ public class OneDrivePublisherLabel extends PublisherLabel implements Describabl
         return addToEquals(new EqualsBuilder(), (OneDrivePublisherLabel) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }

@@ -23,45 +23,13 @@
  */
 package org.jenkinsci.plugins.publishoveronedrive.domain;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Config {
-
-    /**
-     * @see Config#CLIENT_ID
-     */
-    static String CLIENT_ID = "";
-    static String CLIENT_SECRET = "";
-
-    private static final String AUTHORIZE_URI = "https://login.live.com/oauth20_authorize.srf";
-    private static final String REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf";
-
-    // Necessary if CLIENT_SECRET were private
-    public static void setClientSecret(String secret) {
-        CLIENT_SECRET = secret;
-    }
-
-    public static String getAuthorizeUrl(String clientId) {
-        CLIENT_ID = clientId;
-
-        final String[] scopes = {"wl.signin", "wl.basic", "wl.offline_access", "wl.skydrive_update"};
-
-        // TODO: Test that this URL is correct
-        try {
-            String queryString = new FormBuilder()
-                    .appendQueryParameter("client_id", clientId)
-                    .appendQueryParameter("scope", String.join(" ", scopes))
-                    .appendQueryParameter("response_type", "code")
-                    .appendQueryParameter("redirect_uri", REDIRECT_URI).toString();
-
-            return AUTHORIZE_URI + '?' + queryString;
-
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        }
-    }
+    public static String CLIENT_ID = "";
+    public static String CLIENT_SECRET = "";
+    public static final String URL_TOKEN = "https://login.live.com/oauth20_token.srf?";
+    public static final String REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf";
+    public static final String AUTHORIZE_URI = "https://login.live.com/oauth20_authorize.srf";
+    public static final String PATH_SEPERATOR = "/";
+    public static final String VALUE_AUTHORIZATION_CODE = "authorization_code";
+    public static final String[] SCOPES = {"wl.signin", "wl.basic", "wl.offline_access", "wl.skydrive_update"};
 }

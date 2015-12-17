@@ -106,7 +106,6 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
     }
 
     private void connect(final OneDriveClient client) throws IOException, OneDriveException {
-        final BPBuildInfo buildInfo = client.getBuildInfo();
         if (!client.connect()) {
             exception(client, Messages.exception_bap_logInFailed(getToken()));
         }
@@ -118,10 +117,12 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
         }
     }
 
+    @Override
     public OneDriveHostConfigurationDescriptor getDescriptor() {
         return Jenkins.getInstance().getDescriptorByType(OneDriveHostConfigurationDescriptor.class);
     }
 
+    @Override
     protected HashCodeBuilder addToHashCode(final HashCodeBuilder builder) {
         return super.addToHashCode(builder)
                 .append(token)
@@ -134,12 +135,14 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
                 .append(timeout, that.timeout);
     }
 
+    @Override
     protected ToStringBuilder addToToString(final ToStringBuilder builder) {
         return super.addToToString(builder)
                 .append("token", token)
                 .append("timeout", timeout);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -151,10 +154,12 @@ public class OneDriveHostConfiguration extends BPHostConfiguration<OneDriveClien
         return addToEquals(new EqualsBuilder(), (OneDriveHostConfiguration) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }

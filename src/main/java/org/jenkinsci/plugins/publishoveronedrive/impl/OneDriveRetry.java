@@ -43,10 +43,12 @@ public class OneDriveRetry extends Retry implements Describable<OneDriveRetry> {
         super(retries, retryDelay);
     }
 
+    @Override
     public OneDriveRetryDescriptor getDescriptor() {
         return Jenkins.getInstance().getDescriptorByType(OneDriveRetryDescriptor.class);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -58,10 +60,12 @@ public class OneDriveRetry extends Retry implements Describable<OneDriveRetry> {
         return addToEquals(new EqualsBuilder(), (OneDriveRetry) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }
@@ -85,7 +89,5 @@ public class OneDriveRetry extends Retry implements Describable<OneDriveRetry> {
         public jenkins.plugins.publish_over.view_defaults.Retry.Messages getCommonFieldNames() {
             return new jenkins.plugins.publish_over.view_defaults.Retry.Messages();
         }
-
     }
-
 }

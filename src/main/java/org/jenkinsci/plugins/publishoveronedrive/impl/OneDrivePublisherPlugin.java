@@ -26,7 +26,6 @@ package org.jenkinsci.plugins.publishoveronedrive.impl;
 import hudson.Extension;
 import jenkins.model.Jenkins;
 import jenkins.plugins.publish_over.BPPlugin;
-import jenkins.plugins.publish_over.BPPluginDescriptor;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -45,6 +44,7 @@ public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriv
                 null);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -56,10 +56,12 @@ public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriv
         return addToEquals(new EqualsBuilder(), (OneDrivePublisherPlugin) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }
@@ -69,6 +71,7 @@ public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriv
         return Jenkins.getInstance().getDescriptorByType(Descriptor.class);
     }
 
+    @Override
     public OneDriveHostConfiguration getConfiguration(final String name) {
         return getDescriptor().getConfiguration(name);
     }
@@ -76,5 +79,4 @@ public class OneDrivePublisherPlugin extends BPPlugin<OneDrivePublisher, OneDriv
     @Extension
     public static class Descriptor extends OneDrivePublisherPluginDescriptor {
     }
-
 }

@@ -58,14 +58,17 @@ public class OneDriveTransfer extends BPTransfer implements Describable<OneDrive
         return false;
     }
 
+    @Override
     public OneDriveTransferDescriptor getDescriptor() {
         return Jenkins.getInstance().getDescriptorByType(OneDriveTransferDescriptor.class);
     }
 
+    @Override
     protected ToStringBuilder addToToString(final ToStringBuilder builder) {
         return super.addToToString(builder);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -77,10 +80,12 @@ public class OneDriveTransfer extends BPTransfer implements Describable<OneDrive
         return addToEquals(new EqualsBuilder(), (OneDriveTransfer) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }

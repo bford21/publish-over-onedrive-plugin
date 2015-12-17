@@ -45,15 +45,11 @@ import java.util.logging.Logger;
 
 public class OneDrive {
 
-    private static final String URL_TOKEN = "https://login.live.com/oauth20_token.srf?";
-    private static final String REDIRECT_URI = "https://login.live.com/oauth20_desktop.srf";
     private static final Gson gson = new Gson();
-    public static final String PATH_SEPERATOR = "/";
-    public static final String VALUE_AUTHORIZATION_CODE = "authorization_code";
     private final String accessToken;
     private int timeout = -1;
     private OneFolder workingFolder;
-    private static final OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK("https://login.live.com/oauth20_desktop.srf", OneDriveScope.READWRITE);
+    private static final OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK(Config.CLIENT_ID, Config.CLIENT_SECRET, Config.REDIRECT_URI, OneDriveScope.READWRITE);
 
     public OneDrive(String accessToken) {
         this.accessToken = accessToken;
@@ -106,11 +102,6 @@ public class OneDrive {
         return folder;
     }
 
-    private OneFile retrieveFile(String path) throws IOException, OneDriveException {
-        OneFile file = sdk.getFileByPath(path);
-        return file;
-    }
-
     public OneFolder makeDirectory(String dirName) throws IOException, OneDriveException {
         System.out.println("*** makeDirectory: " + dirName);
         OneFolder folder = sdk.getRootFolder().createFolder(dirName);
@@ -140,14 +131,6 @@ public class OneDrive {
         }
     }
 
-    private void deleteFile(OneFile file) throws RestException, IOException {
-        try {
-            file.delete();
-        } catch (OneDriveException ex) {
-            Logger.getLogger(OneDrive.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public static String convertAuthorizationToAccessCode(String authorizationCode) throws IOException {
         if (StringUtils.isEmpty(authorizationCode)) {
             return "";
@@ -162,13 +145,13 @@ public class OneDrive {
 
     private static String readAccessTokenFromWeb(String authorizationCode) throws RestException, UnsupportedEncodingException {
         String accessToken;
-        URL url = getUrl(URL_TOKEN);
+        URL url = getUrl(Config.URL_TOKEN);
         FormBuilder builder = new FormBuilder()
                 .appendQueryParameter("client_id", Config.CLIENT_ID)
                 .appendQueryParameter("client_secret", Config.CLIENT_SECRET)
                 .appendQueryParameter("code", authorizationCode)
-                .appendQueryParameter("grant_type", VALUE_AUTHORIZATION_CODE)
-                .appendQueryParameter("redirect_uri", REDIRECT_URI);
+                .appendQueryParameter("grant_type", Config.VALUE_AUTHORIZATION_CODE)
+                .appendQueryParameter("redirect_uri", Config.REDIRECT_URI);
 
         String body = builder.build();
         String contentType = FormBuilder.CONTENT_TYPE;

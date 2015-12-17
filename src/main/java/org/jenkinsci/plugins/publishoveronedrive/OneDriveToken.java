@@ -40,6 +40,12 @@ public interface OneDriveToken extends StandardCredentials {
     @Nonnull
     String getAccessCode();
 
+    @Nonnull
+    String getClientId();
+
+    @Nonnull
+    String getClientSecret();
+
     class NameProvider extends CredentialsNameProvider<OneDriveToken> {
 
         @Override
@@ -48,6 +54,5 @@ public interface OneDriveToken extends StandardCredentials {
             String description = Util.fixEmptyAndTrim(credentials.getDescription());
             return description != null ? description : Messages.OneDriveTokenImpl_api_token();
         }
-
     }
 }

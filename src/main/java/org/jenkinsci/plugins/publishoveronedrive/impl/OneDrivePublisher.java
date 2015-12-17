@@ -43,18 +43,22 @@ public class OneDrivePublisher extends BapPublisher<OneDriveTransfer> implements
         super(configName, verbose, transfers, useWorkspaceInPromotion, usePromotionTimestamp, retry, label, null);
     }
 
+    @Override
     public OneDriveRetry getRetry() {
         return (OneDriveRetry) super.getRetry();
     }
 
+    @Override
     public OneDrivePublisherLabel getLabel() {
         return (OneDrivePublisherLabel) super.getLabel();
     }
 
+    @Override
     public OneDrivePublisherDescriptor getDescriptor() {
         return Jenkins.getInstance().getDescriptorByType(OneDrivePublisherDescriptor.class);
     }
 
+    @Override
     public boolean equals(final Object that) {
         if (this == that) {
             return true;
@@ -66,10 +70,12 @@ public class OneDrivePublisher extends BapPublisher<OneDriveTransfer> implements
         return addToEquals(new EqualsBuilder(), (OneDrivePublisher) that).isEquals();
     }
 
+    @Override
     public int hashCode() {
         return addToHashCode(new HashCodeBuilder()).toHashCode();
     }
 
+    @Override
     public String toString() {
         return addToToString(new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)).toString();
     }

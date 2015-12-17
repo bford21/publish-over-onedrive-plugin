@@ -44,17 +44,18 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
 
     private final CopyOnWriteList<OneDriveHostConfiguration> hostConfigurations = new CopyOnWriteList<OneDriveHostConfiguration>();
     private BPPluginDescriptor.BPDescriptorMessages msg;
-    private Class hostConfigClass;
 
     public OneDrivePublisherPluginDescriptor() {
         super(OneDrivePublisherPlugin.class);
         load();
     }
 
+    @Override
     public String getDisplayName() {
         return Messages.descriptor_displayName();
     }
 
+    @Override
     public boolean isApplicable(final Class<? extends AbstractProject> aClass) {
         return !BPPlugin.PROMOTION_JOB_TYPE.equals(aClass.getCanonicalName());
     }
@@ -72,6 +73,7 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
         return null;
     }
 
+    @Override
     public boolean configure(final StaplerRequest request, final JSONObject formData) {
         hostConfigurations.replaceBy(request.bindJSONToList(OneDriveHostConfiguration.class, formData.get("instance")));
         save();
@@ -129,11 +131,4 @@ public class OneDrivePublisherPluginDescriptor extends BuildStepDescriptor<Publi
                 null
         );
     }
-
-    public Object readResolve() {
-        msg = null;
-        hostConfigClass = null;
-        return this;
-    }
-
 }

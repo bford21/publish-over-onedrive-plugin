@@ -42,6 +42,7 @@ import org.jenkinsci.plugins.publishoveronedrive.impl.Messages;
 import org.kohsuke.stapler.QueryParameter;
 import java.util.List;
 import javax.servlet.ServletException;
+import org.jenkinsci.plugins.publishoveronedrive.domain.Config;
 
 @Extension
 public class OneDriveHostConfigurationDescriptor extends Descriptor<OneDriveHostConfiguration> {
@@ -97,7 +98,7 @@ public class OneDriveHostConfigurationDescriptor extends Descriptor<OneDriveHost
             refreshToken = token2.getAccessCode();
         }
 
-        OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK("https://login.live.com/oauth20_desktop.srf", OneDriveScope.READWRITE);
+        OneDriveSDK sdk = OneDriveFactory.createOneDriveSDK(Config.CLIENT_ID, Config.CLIENT_SECRET, Config.REDIRECT_URI, OneDriveScope.READWRITE);
 
         try {
             sdk.authenticateWithRefreshToken(refreshToken);
