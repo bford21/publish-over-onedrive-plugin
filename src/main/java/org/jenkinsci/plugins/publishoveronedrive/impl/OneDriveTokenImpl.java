@@ -85,6 +85,10 @@ public class OneDriveTokenImpl extends BaseStandardCredentials implements OneDri
         return accessCode;
     }
 
+    public boolean isAssigned() {
+        return (this.getClientId().length() > 0) && (this.getClientSecret().length() > 0);
+    }
+
     @Extension
     public static class DescriptorImpl extends BaseStandardCredentialsDescriptor {
 

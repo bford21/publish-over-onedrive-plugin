@@ -65,10 +65,10 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
 
     public boolean setClientIdAndSecret() throws IOException, OneDriveException {
         List<OneDriveToken> credentials = CredentialsProvider.lookupCredentials(OneDriveToken.class, Jenkins.getInstance(), null, (DomainRequirement) null);
-        for (OneDriveToken token : credentials) {
-            if (!token.getClientId().equals("") && !token.getClientSecret().equals("")) {
-                Config.CLIENT_ID = token.getClientId();
-                Config.CLIENT_SECRET = token.getClientSecret();
+        for (OneDriveToken t : credentials) {
+            if (t.isAssigned()) {
+                Config.CLIENT_ID = t.getClientId();
+                Config.CLIENT_SECRET = t.getClientSecret();
                 return true;
             }
         }
@@ -119,7 +119,7 @@ public class OneDriveClient extends BPDefaultClient<OneDriveTransfer> {
     }
 
     public boolean connect() throws OneDriveException, IOException {
-        setClientIdAndSecret();
+        this.setClientIdAndSecret();
         try {
             return onedrive.connect();
         } catch (IOException ioe) {

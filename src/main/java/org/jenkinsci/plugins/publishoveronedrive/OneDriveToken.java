@@ -43,6 +43,8 @@ public interface OneDriveToken extends StandardCredentials {
     @Nonnull
     String getClientId();
 
+    boolean isAssigned();
+
     @Nonnull
     String getClientSecret();
 
